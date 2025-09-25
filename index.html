@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StrataHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #fff;
+      background: #111; /* match Games page background */
+      position: relative;
+      overflow: hidden;
+    }
+    /* Sidebar (left) navigation */
+    .navbar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 88px;
+      background: #222;
+      padding: 20px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      z-index: 6; /* sit above stars and glow */
+    }
+  .navbar-title { display: none; }
+  .logo-link { display: inline-flex; width:56px; height:56px; align-items:center; justify-content:center; border-radius:10px; overflow: hidden; }
+  .navbar-logo { width:48px; height:48px; object-fit:contain; display:block; }
+    .navbar-icons { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+    .nav-link { display: inline-flex; width:56px; height:56px; align-items:center; justify-content:center; border-radius:12px; }
+    .navbar-icon {
+      width: 32px;
+      height: 32px;
+      opacity: 0.95;
+      filter: invert(1); /* make icons white */
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.12s;
+      display: block;
+    }
+    .nav-link:hover { background: rgba(255,255,255,0.04); transform: translateY(-3px); }
+
+    /* Push main content right so sidebar doesn't overlap */
+    .center-content { margin-left: 100px; }
+    .stars {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+    .glow {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 400px;
+      background: radial-gradient(circle at 50% 80%, #a259ff 0%, #6c2fff 60%, transparent 100%);
+      opacity: 0.7;
+      filter: blur(60px);
+      z-index: 1;
+    }
+    .center-content {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .main-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .main-title .accent {
+      color: #a259ff;
+      text-shadow: 0 0 16px #a259ff99;
+    }
+    .subtitle {
+      font-size: 1.3rem;
+      color: #bbb;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    .glow-btn {
+      background: linear-gradient(90deg, #a259ff 0%, #6c2fff 100%);
+      color: #fff;
+      border: none;
+      border-radius: 24px;
+      padding: 16px 38px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      box-shadow: 0 0 32px #a259ff88, 0 2px 8px rgba(0,0,0,0.18);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 18px;
+    }
+    .glow-btn:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 48px #a259ffcc, 0 2px 12px rgba(0,0,0,0.22);
+    }
+    @media (max-width: 600px) {
+      .main-title { font-size: 2rem; }
+      .subtitle { font-size: 1rem; }
+      .glow { width: 98vw; height: 180px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a class="logo-link" href="index.html" aria-label="StrataHub home">
+      <img class="navbar-logo" src="Images/StrataHubLogo.png" alt="StrataHub logo">
+    </a>
+    <div class="navbar-icons">
+      <a class="nav-link" href="index.html"><img class="navbar-icon" src="https://img.icons8.com/ios-filled/50/ffffff/home.png" alt="Home"></a>
+      <a class="nav-link" href="games.html"><img class="navbar-icon" src="https://img.icons8.com/ios-filled/50/ffffff/controller.png" alt="Games"></a>
+      <a class="nav-link" href="#"><img class="navbar-icon" src="https://img.icons8.com/ios-filled/50/ffffff/layers.png" alt="Layers"></a>
+      <a class="nav-link" href="#"><img class="navbar-icon" src="https://img.icons8.com/ios-filled/50/ffffff/settings.png" alt="Settings"></a>
+    </div>
+  </div>
+  <canvas class="stars"></canvas>
+  <div class="glow"></div>
+  <div class="center-content">
+    <div class="main-title">Welcome to <span class="accent">StrataHub</span></div>
+    <div class="subtitle">Start your unblocking journey today!</div>
+  <button class="glow-btn" onclick="window.location.href='games.html'">Get Started</button>
+  </div>
+  <script>
+    // Starfield background
+    const canvas = document.querySelector('.stars');
+    const ctx = canvas.getContext('2d');
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    const stars = Array.from({length: 120}, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.2 + 0.3
+    }));
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.save();
+      ctx.fillStyle = '#fff';
+      stars.forEach(star => {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
+        ctx.fill();
+      });
+      ctx.restore();
+    }
+    drawStars();
+    // Animate twinkle
+    setInterval(() => {
+      stars.forEach(star => {
+        star.r += (Math.random() - 0.5) * 0.08;
+        star.r = Math.max(0.2, Math.min(1.5, star.r));
+      });
+      drawStars();
+    }, 100);
+  </script>
+</body>
+</html>

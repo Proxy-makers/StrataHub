@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Games | StrataHub</title>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+	<style>
+		body {
+			background: #111;
+			color: #fff;
+			font-family: 'Montserrat', Arial, sans-serif;
+			margin: 0;
+			min-height: 100vh;
+		}
+		/* Sidebar (left) navigation */
+		.navbar {
+			position: fixed;
+			left: 0;
+			top: 0;
+			height: 100vh;
+			width: 88px;
+			background: #222;
+			padding: 20px 12px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: flex-start;
+			gap: 8px;
+			z-index: 6;
+		}
+		.navbar-title { display: none; }
+		.logo-link { display: inline-flex; width:56px; height:56px; align-items:center; justify-content:center; border-radius:10px; overflow: hidden; }
+		.navbar-logo { width:48px; height:48px; object-fit:contain; display:block; }
+		.navbar-icons { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+		.nav-link { display: inline-flex; width:56px; height:56px; align-items:center; justify-content:center; border-radius:12px; }
+		.navbar-icon {
+			width: 32px;
+			height: 32px;
+			opacity: 0.95;
+			filter: invert(1);
+			cursor: pointer;
+			transition: opacity 0.15s, transform 0.12s;
+			display: block;
+		}
+		.nav-link:hover { background: rgba(255,255,255,0.04); transform: translateY(-3px); }
+
+		/* Shift content right so sidebar fits */
+		.container { margin-left: 100px; }
+		.container {
+			max-width: 1200px;
+			margin: 40px auto;
+			padding: 0 20px;
+		}
+		h1 {
+			text-align: center;
+			font-size: 2.5rem;
+			margin-bottom: 12px;
+			font-weight: 700;
+		}
+		.subtitle {
+			text-align: center;
+			font-size: 1.2rem;
+			color: #bbb;
+			margin-bottom: 32px;
+		}
+		.search-bar {
+			width: 340px;
+			max-width: 90vw;
+			padding: 12px 22px;
+			border-radius: 24px;
+			border: none;
+			background: #222;
+			color: #eee;
+			font-size: 1.1rem;
+			margin: 0 auto 38px auto;
+			outline: none;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+			display: block;
+		}
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+			gap: 32px 24px;
+		}
+		.card {
+			background: #232323;
+			border-radius: 16px;
+			box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+			overflow: hidden;
+			transition: transform 0.2s, box-shadow 0.2s;
+			cursor: pointer;
+			display: flex;
+			flex-direction: column;
+			align-items: stretch;
+		}
+		.card:hover {
+			transform: translateY(-6px) scale(1.03);
+			box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+		}
+		.card-img {
+			width: 100%;
+			height: 140px;
+			object-fit: cover;
+			background: #444;
+		}
+		.card-content {
+			padding: 18px 16px 14px 16px;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+		}
+		.card-title {
+			font-size: 1.1rem;
+			font-weight: 700;
+			margin-bottom: 6px;
+			text-align: center;
+		}
+		@media (max-width: 600px) {
+			h1 { font-size: 2rem; }
+			.container { padding: 0 8px; }
+			.card-content { padding: 12px 8px 10px 8px; }
+			.search-bar { width: 98vw; max-width: 98vw; }
+		}
+	</style>
+</head>
+<body>
+	<div class="navbar">
+		<a class="logo-link" href="index.html" aria-label="StrataHub home">
+			<img class="navbar-logo" src="Images/StrataHubLogo.png" alt="StrataHub logo">
+		</a>
+		<div class="navbar-icons">
+			<a class="nav-link" href="index.html"><img class="navbar-icon" src="https://img.icons8.com/ios-filled/50/ffffff/home.png" alt="Home"></a>
+			<a class="nav-link" href="games.html"><img class="navbar-icon" src="https://img.icons8.com/ios-filled/50/ffffff/controller.png" alt="Games"></a>
+			<a class="nav-link" href="#"><img class="navbar-icon" src="https://img.icons8.com/ios-filled/50/ffffff/layers.png" alt="Layers"></a>
+			<a class="nav-link" href="#"><img class="navbar-icon" src="https://img.icons8.com/ios-filled/50/ffffff/settings.png" alt="Settings"></a>
+		</div>
+	</div>
+	<div class="container">
+		<h1>Games</h1>
+		<div class="subtitle">Choose a game to start playing!</div>
+		<input class="search-bar" type="text" id="searchInput" placeholder="Search..." onkeyup="filterGames()">
+		<div class="grid" id="gamesGrid">
+			<!-- Example game cards -->
+			<a class="card" href="#">
+				<img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Google_Docs_Logo.png" alt="Game Suggestions">
+				<div class="card-content">
+					<div class="card-title">Game Suggestions</div>
+				</div>
+			</a>
+			<a class="card" href="#">
+				<img class="card-img" src="https://via.placeholder.com/220x140?text=1" alt="1">
+				<div class="card-content">
+					<div class="card-title">1</div>
+				</div>
+			</a>
+			<a class="card" href="#">
+				<img class="card-img" src="https://via.placeholder.com/220x140?text=1v1.lol" alt="1v1.lol">
+				<div class="card-content">
+					<div class="card-title">1v1.lol</div>
+				</div>
+			</a>
+			<a class="card" href="#">
+				<img class="card-img" src="https://via.placeholder.com/220x140?text=2048" alt="2048">
+				<div class="card-content">
+					<div class="card-title">2048</div>
+				</div>
+			</a>
+			<a class="card" href="#">
+				<img class="card-img" src="https://via.placeholder.com/220x140?text=OvO" alt="OvO">
+				<div class="card-content">
+					<div class="card-title">OvO</div>
+				</div>
+			</a>
+			<a class="card" href="#">
+				<img class="card-img" src="https://via.placeholder.com/220x140?text=OvO+2" alt="OvO 2">
+				<div class="card-content">
+					<div class="card-title">OvO 2</div>
+				</div>
+			</a>
+			<a class="card" href="#">
+				<img class="card-img" src="https://via.placeholder.com/220x140?text=OvO+Dimensions" alt="OvO Dimensions">
+				<div class="card-content">
+					<div class="card-title">OvO Dimensions</div>
+				</div>
+			</a>
+			<a class="card" href="#">
+				<img class="card-img" src="https://via.placeholder.com/220x140?text=Slope" alt="Slope">
+				<div class="card-content">
+					<div class="card-title">Slope</div>
+				</div>
+			</a>
+			<a class="card" href="Games/n-gon.html">
+				<img class="card-img" src="Images/n-gon.png" alt="N-gon">
+				<div class="card-content">
+					<div class="card-title">N-gon</div>
+				</div>
+			</a>
+			<a class="card" href="Games/drive-mad.html">
+				<img class="card-img" src="Images/drive-mad.jpg" alt="Drive Mad">
+				<div class="card-content">
+					<div class="card-title">Drive Mad</div>
+				</div>
+			</a>
+			<!-- Add more cards as needed -->
+		</div>
+	</div>
+	<script>
+		function filterGames() {
+			const input = document.getElementById('searchInput').value.toLowerCase();
+			const cards = document.querySelectorAll('.card');
+			cards.forEach(card => {
+				const title = card.querySelector('.card-title').textContent.toLowerCase();
+				card.style.display = title.includes(input) ? '' : 'none';
+			});
+		}
+	</script>
+</body>
+</html>

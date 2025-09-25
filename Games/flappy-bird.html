@@ -1,0 +1,33 @@
+<section id="flappy-bird">
+  <h2 class="section-title">Play Flappy Bird</h2>
+  <div style="display:flex; flex-direction: column; align-items:center; gap:10px;">
+    <iframe 
+      id="flappyFrame"
+      src="https://db.duckmath.org/html/flappy_bird" 
+      title="Flappy Bird" 
+      width="320" 
+      height="480" 
+      style="border:none; border-radius:15px;" 
+      scrolling="no" 
+      allowfullscreen>
+    </iframe>
+    <button 
+      onclick="openFullscreen()" 
+      style="padding:10px 20px; border:none; border-radius:10px; background:#00f0ff; color:#1f1c2c; font-weight:bold; cursor:pointer;">
+      Full Screen
+    </button>
+  </div>
+</section>
+
+<script>
+  function openFullscreen() {
+    const iframe = document.getElementById('flappyFrame');
+    if (iframe.requestFullscreen) {
+      iframe.requestFullscreen();
+    } else if (iframe.webkitRequestFullscreen) { /* Safari */
+      iframe.webkitRequestFullscreen();
+    } else if (iframe.msRequestFullscreen) { /* IE11 */
+      iframe.msRequestFullscreen();
+    }
+  }
+</script>
