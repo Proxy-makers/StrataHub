@@ -4,10 +4,10 @@
   "private": true,
   "description": "Static site for StrataHub",
   "scripts": {
-    "preview": "python3 -m http.server 8000",
-    "start": "npx http-server -p 8000",
-    "live": "npx live-server --port=8000 --open=./"
+  "preview": "python3 -m http.server 8000",
+  "start": "node server.js",
+  "live": "npx live-server --port=8000 --open=./"
   },
-  "author": "",
+  "author": "Everest",
   "license": "MIT"
 }
