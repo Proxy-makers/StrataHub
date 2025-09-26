@@ -11,44 +11,44 @@
       min-height: 100vh;
       font-family: 'Montserrat', Arial, sans-serif;
       color: #fff;
-      background: #111; /* match Games page background */
+      background: #111;
       position: relative;
       overflow: hidden;
     }
-    /* Sidebar (left) navigation */
+    /* Compact Sidebar (left) navigation for index */
     .navbar {
       position: fixed;
       left: 0;
       top: 0;
       height: 100vh;
-      width: 88px;
+      width: 48px;              /* compact width */
       background: #222;
-      padding: 20px 12px;
+      padding: 12px 8px;        /* tighter padding */
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
       gap: 8px;
-      z-index: 6; /* sit above stars and glow */
+      z-index: 6;
     }
-  .navbar-title { display: none; }
-  .logo-link { display: inline-flex; width:56px; height:56px; align-items:center; justify-content:center; border-radius:10px; overflow: hidden; }
-  .navbar-logo { width:48px; height:48px; object-fit:contain; display:block; }
-    .navbar-icons { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
-    .nav-link { display: inline-flex; width:56px; height:56px; align-items:center; justify-content:center; border-radius:12px; }
+    .navbar-title { display: none; }
+    .logo-link { display: inline-flex; width:40px; height:40px; align-items:center; justify-content:center; border-radius:8px; overflow: hidden; }
+    .navbar-logo { width:34px; height:34px; object-fit:contain; display:block; }
+    .navbar-icons { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+    .nav-link { display: inline-flex; width:40px; height:40px; align-items:center; justify-content:center; border-radius:10px; }
     .navbar-icon {
-      width: 32px;
-      height: 32px;
+      width: 20px;              /* smaller icons */
+      height: 20px;
       opacity: 0.95;
-      filter: invert(1); /* make icons white */
+      filter: invert(1);
       cursor: pointer;
       transition: opacity 0.15s, transform 0.12s;
       display: block;
     }
     .nav-link:hover { background: rgba(255,255,255,0.04); transform: translateY(-3px); }
 
-    /* Push main content right so sidebar doesn't overlap */
-    .center-content { margin-left: 100px; }
+    /* Push main content right so compact sidebar fits */
+    .center-content { margin-left: 64px; } /* reduced margin-left */
     .stars {
       position: absolute;
       width: 100vw;
@@ -115,6 +115,7 @@
       .main-title { font-size: 2rem; }
       .subtitle { font-size: 1rem; }
       .glow { width: 98vw; height: 180px; }
+      .center-content { margin-left: 56px; }
     }
   </style>
 </head>
